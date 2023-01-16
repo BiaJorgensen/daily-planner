@@ -24,32 +24,33 @@ $(function () {
   // Display current date - Format: Day of week, Month Day Year
   let currentDay = dayjs();
   $('#currentDay').text(currentDay.format('dddd, MMMM D YYYY'));
+  const timeBlockDivs = $('.time-block');
 
   
   
  
 
   // Variables to get time slots from HTML
-  let slot9 = $('#hour-9');
-  let slot10 = $('#hour-10');
-  let slot11 = $('#hour-11');
-  let slot12 = $('#hour-12');
-  let slot13 = $('#hour-13');
-  let slot14 = $('#hour-14');
-  let slot15 = $('#hour-15');
-  let slot16 = $('#hour-16');
-  let slot17 = $('#hour-17');
+  let slot9 = $('#9');
+  let slot10 = $('#10');
+  let slot11 = $('#11');
+  let slot12 = $('#12');
+  let slot13 = $('#13');
+  let slot14 = $('#14');
+  let slot15 = $('#15');
+  let slot16 = $('#16');
+  let slot17 = $('#17');
 
   
 // Function to add class to time slot depending on currect hour
 function addStyleToTimeSlot() {
   // Get current time
   const currentHour = dayjs().hour();
-  const timeBlockDivs = $('.time-block');
+  
   timeBlockDivs.each(function() {
     let hour = $(this).attr('id');
     if (hour == currentHour) {
-      $(this).addClass('present');
+      $(this).addClass('present')
     }
     else if (hour < currentHour) {
       $(this).addClass('past')
@@ -64,6 +65,23 @@ function addStyleToTimeSlot() {
 
 addStyleToTimeSlot()
   
+let saveBtn = $('.saveBtn');
+saveBtn.click(function (e) { 
+  e.preventDefault();
+
+  let timeSlot = $(this).parents().attr('id')
+  console.log(timeSlot);
+ 
+  // timeBlockDivs.each(function(){
+  //   let timeSlot = $(this).attr('id')
+  //   console.log(timeSlot);
+  
+  // })
+  
+}); 
+
+
+
 
 
 
