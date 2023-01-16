@@ -27,19 +27,6 @@ $(function () {
   const timeBlockDivs = $('.time-block');
 
   
-  
- 
-
-  // Variables to get time slots from HTML
-  let slot9 = $('#9');
-  let slot10 = $('#10');
-  let slot11 = $('#11');
-  let slot12 = $('#12');
-  let slot13 = $('#13');
-  let slot14 = $('#14');
-  let slot15 = $('#15');
-  let slot16 = $('#16');
-  let slot17 = $('#17');
 
   
 // Function to add class to time slot depending on currect hour
