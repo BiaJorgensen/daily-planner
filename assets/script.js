@@ -21,10 +21,25 @@ $(function () {
   //
   // TODO: Add code to display the current date in the header of the page.
 
+  // Display current date - Format: Day of week, Month Day Year
   let currentDay = dayjs();
   $('#currentDay').text(currentDay.format('dddd, MMMM D YYYY'));
 
-  
+  // Get current time
+  let hour = dayjs().hour();
+  console.log(hour);
+
+  // Variables to get time slots from HTML
+  let slot9 = $('#hour-9');
+  let slot10 = $('#hour-10');
+  let slot11 = $('#hour-11');
+  let slot12 = $('#hour-12');
+  let slot13 = $('#hour-13');
+  let slot14 = $('#hour-14');
+  let slot15 = $('#hour-15');
+  let slot16 = $('#hour-16');
+  let slot17 = $('#hour-17');
+
   
   
 
