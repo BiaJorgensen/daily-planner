@@ -65,7 +65,7 @@ function addStyleToTimeSlot() {
 
 addStyleToTimeSlot()
   
-const saveBtn = $('.saveBtn');
+let saveBtn = $('.saveBtn');
 saveBtn.click(function (e) { 
   
   e.preventDefault();
@@ -74,15 +74,7 @@ saveBtn.click(function (e) {
   console.log(timeSlot);
  
   let description = $(this).prev().val();
-
-  const newTask = {
-    timeSlot,
-    description
-  }
-
-  const allTasks = JSON.parse(localStorage.getItem("task")) || [];
-  allTasks.push(newTask);
-  localStorage.setItem("task", JSON.stringify(allTasks))
+  localStorage.setItem(timeSlot, description)
   
   
   
