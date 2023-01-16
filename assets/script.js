@@ -67,16 +67,16 @@ addStyleToTimeSlot()
   
 let saveBtn = $('.saveBtn');
 saveBtn.click(function (e) { 
+  
   e.preventDefault();
 
   let timeSlot = $(this).parents().attr('id')
   console.log(timeSlot);
  
-  // timeBlockDivs.each(function(){
-  //   let timeSlot = $(this).attr('id')
-  //   console.log(timeSlot);
+  let description = $(this).prev().val();
+  localStorage.setItem(timeSlot, description)
   
-  // })
+  
   
 }); 
 
