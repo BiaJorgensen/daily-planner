@@ -25,9 +25,9 @@ $(function () {
   let currentDay = dayjs();
   $('#currentDay').text(currentDay.format('dddd, MMMM D YYYY'));
 
-  // Get current time
-  let hour = dayjs().hour();
-  console.log(hour);
+  
+  
+ 
 
   // Variables to get time slots from HTML
   let slot9 = $('#hour-9');
@@ -41,6 +41,28 @@ $(function () {
   let slot17 = $('#hour-17');
 
   
+// Function to add class to time slot depending on currect hour
+function addStyleToTimeSlot() {
+  // Get current time
+  const currentHour = dayjs().hour();
+  const timeBlockDivs = $('.time-block');
+  timeBlockDivs.each(function() {
+    let hour = $(this).attr('id');
+    if (hour == currentHour) {
+      $(this).addClass('present');
+    }
+    else if (hour < currentHour) {
+      $(this).addClass('past')
+    }
+    else if (hour > currentHour) {
+      $(this).addClass('future')
+    }
+  })
+
+
+}
+
+addStyleToTimeSlot()
   
 
 
