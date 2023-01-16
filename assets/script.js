@@ -59,9 +59,22 @@ function addStyleToTimeSlot() {
       $(this).addClass('future')
     }
   })
-
-
 }
+
+timeBlockDivs.each(function() {
+const timeSlot = $(this).attr('id');
+const task = JSON.parse(localStorage.getItem(timeSlot));
+if (task) {
+  $(this).children('textarea').val(task)
+}
+
+
+
+
+
+})
+
+
 
 addStyleToTimeSlot()
   
@@ -71,14 +84,13 @@ saveBtn.click(function (e) {
   e.preventDefault();
 
   let timeSlot = $(this).parents().attr('id')
-  console.log(timeSlot);
+  
  
   let description = $(this).prev().val();
-  localStorage.setItem(timeSlot, description)
-  
-  
-  
+  localStorage.setItem(timeSlot, JSON.stringify(description))
+
 }); 
+
 
 
 
