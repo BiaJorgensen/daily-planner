@@ -1,41 +1,30 @@
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
-// in the html.
+// Functions are only called after the document is ready
 $(function () {
-  // TODO: Add a listener for click events on the save button. This code should
-  // use the id in the containing time-block as a key to save the user input in
-  // local storage. HINT: What does `this` reference in the click listener
-  // function? How can DOM traversal be used to get the "hour-x" id of the
-  // time-block containing the button that was clicked? How might the id be
-  // useful when saving the description in local storage?
-  //
-  // TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
-  //
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
-  //
-  // TODO: Add code to display the current date in the header of the page.
+  showCurrentDate();
+  addStyleToTimeSlot();
+  getTaskfromLS()
+  saveTaskToLS()
 
+});
+
+// Function to show current date on page 
+function showCurrentDate() {
+  // Variable to get current date/time
+  const currentDay = dayjs();
   // Display current date - Format: Day of week, Month Day Year
-  let currentDay = dayjs();
   $('#currentDay').text(currentDay.format('dddd, MMMM D YYYY'));
-  const timeBlockDivs = $('.time-block');
-
-  
-
-  
-// Function to add class to time slot depending on currect hour
+};
+    
+// Function to add class to time slot depending on current hour
 function addStyleToTimeSlot() {
-  // Get current time
+  // Gets current hour
   const currentHour = dayjs().hour();
-  
+  // Variable to access div in HTML that contains the time slots
+  const timeBlockDivs = $('.time-block');
+  // The below is done for each of the HTML timeBlockDivs
   timeBlockDivs.each(function() {
-    let hour = $(this).attr('id');
+    // Gets id from timeBlockDivs and compares with current hour to apply different colors to time slots if they are past hour, present hour or future hour
+    const hour = $(this).attr('id');
     if (hour == currentHour) {
       $(this).addClass('present')
     }
@@ -46,45 +35,35 @@ function addStyleToTimeSlot() {
       $(this).addClass('future')
     }
   })
-}
+};
 
-timeBlockDivs.each(function() {
-const timeSlot = $(this).attr('id');
-const task = JSON.parse(localStorage.getItem(timeSlot));
-if (task) {
-  $(this).children('textarea').val(task)
-}
+// Function to get tasks saved from local storage to show on page even after page is reloaded
+function getTaskfromLS() {
+  // Variable to access div in HTML that contains the time slots
+  const timeBlockDivs = $('.time-block');
+  // The below is done for each of the HTML timeBlockDivs
+  timeBlockDivs.each(function() {
+    // Gets id from timeBlockDivs so it can be used to get the task from local storage according to the key that was created using the same id
+    const hour = $(this).attr('id');
+    const task = JSON.parse(localStorage.getItem(hour));
+    // Ensures that task added by user will keep showing on page even after page is reloaded
+    if (task) {
+      $(this).children('textarea').val(task)
+    }
+  })
+};
 
-
-
-
-
-})
-
-
-
-addStyleToTimeSlot()
-  
-let saveBtn = $('.saveBtn');
-saveBtn.click(function (e) { 
-  
-  e.preventDefault();
-
-  let timeSlot = $(this).parents().attr('id')
-  
- 
-  let description = $(this).prev().val();
-  localStorage.setItem(timeSlot, JSON.stringify(description))
-
-}); 
-
-
-
-
-
-
-
-
-
-
-});
+// Funtion to save tasks to local storage when save button is clicked
+function saveTaskToLS() {
+ // Variable to access all HTML save buttons
+ const saveBtn = $('.saveBtn');
+ // When save button is clicked, below function identifies the id of the div where the button is located and use the id as key to save task in local storage
+ saveBtn.click(function (e) { 
+   e.preventDefault();
+   // Gets id from div (parent) where the button is located
+   const hour = $(this).parents().attr('id')
+   // Gets content in textbox from same div that button that was clicked is located (textbox is the button's previous sibling)
+   const description = $(this).prev().val();
+   localStorage.setItem(hour, JSON.stringify(description))
+ }); 
+};
