@@ -18,7 +18,7 @@ function showCurrentDate() {
 // Function to add class to time slot depending on current hour
 function addStyleToTimeSlot() {
   // Gets current hour
-  const currentHour = 14;
+  const currentHour = dayjs().hour();
   // Variable to access div in HTML that contains the time slots
   const timeBlockDivs = $('.time-block');
   // The below is done for each of the HTML timeBlockDivs
